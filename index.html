@@ -1,0 +1,2961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MAVIS</title>
+    <link rel="icon" type="image/x-icon" href="icons/mavis-logo-new.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1, h2 {
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            background-image:
+                linear-gradient(to bottom,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(0, 0, 0, 0) 10%,
+                    rgba(0, 0, 0, 0) 90%,
+                    rgba(0, 0, 0, 1) 100%),
+                url('images/mavis-1-5-banner-1.png');
+
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 5vw; /* Vermeidet Text, der an Bildschirmrändern klebt */
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 12rem); /* Dynamische Schriftgröße */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s infinite linear;
+            text-align: center;
+            margin: 0;
+            position: relative; /* Positionierung muss relativ oder absolut sein */
+            top: -30%; /* Verschiebt das h1-Element um 30% nach oben */
+        }
+
+        .hero h3 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-top: 1rem;
+            position: relative; /* Positionierung muss relativ oder absolut sein */
+            top: -35%; /* Verschiebt das h3-Element um 30% nach oben */
+        }
+
+        h5 {
+            font-size: clamp(1rem, 3vw, 1.9rem);
+            font-family: 'Arial', sans-serif;
+            color: #ff1d00;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Farbglanz-Animation */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Mobile Anpassungen */
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 10vh 5vw;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 6rem);
+            }
+
+            .hero h3 {
+                font-size: clamp(1rem, 5vw, 1.5rem);
+            }
+
+            h5 {
+                font-size: clamp(0.8rem, 3vw, 1.5rem);
+            }
+        }
+
+
+        .hero .text-box {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px  rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 20px;
+            border-radius: 10px;
+            width: 20%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .hero .text-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(240, 240, 240, 0.3);
+        }
+
+        .hero .text-box2 {
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px  rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 20px;
+            border-radius: 10px;
+            width: 20%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .hero .text-box2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(240, 240, 240, 0.3);
+        }
+
+        .hero .text-box3 {
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px  rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 20px;
+            border-radius: 10px;
+            width: 20%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .hero .text-box3:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(240, 240, 240, 0.3);
+        }
+
+        .hero .text-box h2 {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            font-size: 30px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .text-box p {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+        }
+
+        .hero .text-box2 h2 {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            font-size: 30px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .text-box2 p {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+        }
+        .hero .text-box3 h2 {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            font-size: 30px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero .text-box3 p {
+            position: relative;
+            color: transparent;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: flex;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+                top: -100%;
+            }
+            50% {
+                left: 100%;
+                top: 100%;
+            }
+            100% {
+                left: -100%;
+                top: -100%;
+            }
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero h1:hover::after {
+            opacity: 1;
+        }
+
+        .hero h1 span {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .github {
+            height: 350px; /* Höhe auf 10% der Viewport-Breite gesetzt */
+            width: 100%; /* Breite bleibt 100% der übergeordneten Container */
+            background: #000000; /* Hintergrundfarbe bleibt schwarz */
+        }
+
+        .versions {
+            width: 100%;
+            background-image:
+                linear-gradient(to bottom,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(0, 0, 0, 0) 10%,
+                    rgba(0, 0, 0, 0) 90%,
+                    rgba(0, 0, 0, 1) 100%),
+                url('images/mavis-4-banner-5.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 5vw 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .version-box {
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px outset rgba(0, 0, 0, 0.545);
+            box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.3);
+            padding: 5vw;
+            border-radius: 10px;
+            text-align: center;
+            width: clamp(200px, 30%, 300px); /* Dynamische Anpassung der Breite */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .version-box:hover {
+            transform: translateY(-25px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background-color: rgba(240, 240, 240, 0.3);
+        }
+
+        .version-icon {
+            font-size: 50px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .logo img,
+        .logo-3 img,
+        .logo-4 img {
+            border-radius: 0;
+        }
+
+        .logo img {
+            width: 90%;
+        }
+
+        .logo-3 img {
+            width: 100%;
+        }
+
+        .logo-4 img {
+            width: 110%;
+        }
+
+        .version-box h2,
+        .version-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .version-box p {
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .versions {
+                padding: 5vw;
+            }
+
+            .version-box {
+                width: 90%; /* Größere Boxen auf kleineren Bildschirmen */
+                padding: 8vw;
+                margin: 3vh auto;
+            }
+        }
+
+        .button-github {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 3rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-github svg {
+            height: 35px;
+        }
+
+        .button-github:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+        .button-mavis {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-mavis svg {
+            height: 35px;
+        }
+
+        .button-mavis:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+        .button-mavis-lx {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-mavis-lx svg {
+            height: 35px;
+        }
+
+        .button-mavis-lx:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+        .button-mavis-terminal {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-mavis-terminal svg {
+            height: 35px;
+        }
+
+        .button-mavis-terminal:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+        .button-mavis-terminal-5 {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-mavis-terminal-5 svg {
+            height: 35px;
+        }
+
+        .button-mavis-terminal-5:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+        .MAVIS-4 {
+            height: 260vw;
+            width: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding: 5vw; /* Vermeidet Text, der an Bildschirmrändern klebt */
+        }
+
+        .MAVIS-4 h1 {
+            font-size: clamp(3rem, 6vw, 9rem); /* Dynamische Schriftgröße */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s infinite linear;
+            text-align: center;
+            margin: 0;
+            position: relative; /* Positionierung muss relativ oder absolut sein */
+        }
+
+        .MAVIS-4 h3 {
+            font-size: clamp(0.6rem, 1.5vw, 1.8rem); /* kleiner, aber weiterhin responsiv */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent; /* Für Safari */
+            color: transparent; /* Fallback für andere Browser */
+            text-align: center;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .image-stack-1 img {
+            position: absolute;
+            left: 65%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 30%; /* Stellt die Breite des Bildes ein */
+            z-index: 999; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
+        }
+
+        .image-stack-1   img:first-child {
+            margin-top: 0;
+        }
+
+        .image-stack-2 img {
+            position: absolute;
+            left: 65%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 30%; /* Stellt die Breite des Bildes ein */
+            z-index: 999; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
+        }
+
+        .image-stack-2 img:first-child {
+            margin-top: 0;
+        }
+
+        .image-stack-3 img {
+            position: absolute;
+            left: 65%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 30%; /* Stellt die Breite des Bildes ein */
+        }
+
+        .image-stack-3 img:first-child {
+            margin-top: 0;
+        }
+
+        .mavis-4 p {
+            font-size: clamp(0.5rem, 2vw, 4rem); /* Dynamische Schriftgröße */
+            color: #333;
+            max-width: 50%;
+        }
+
+        .content-container-0 {
+            display: flex;
+            align-items: center; /* Zentriert den Inhalt vertikal */
+            margin-top: 5%;
+        }
+
+        .content-container-1 {
+            display: flex;
+            align-items: center; /* Zentriert den Inhalt vertikal */
+            margin-top: -5%;
+        }
+
+        .content-container-2 {
+            display: flex;
+            align-items: center; /* Zentriert den Inhalt vertikal */
+            margin-top: 5%;
+        }
+
+        .content-container-3 {
+            display: flex;
+            align-items: center; /* Zentriert den Inhalt vertikal */
+            margin-top: 5%;
+        }
+
+        .text-container {
+            margin-top: 13%;
+            margin-left: 5%;
+            flex: 1; /* Der Text nimmt den restlichen Platz auf der linken Seite ein */
+            padding-right: 20px; /* Abstand zwischen Text und Bild */
+            font-size: clamp(0.5rem, 1.3vw, 4rem); /* Dynamische Schriftgröße */
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #999999,
+                #b4b4b4,
+                #ffffff
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 50%;
+        }
+
+        .image-container {
+            flex-shrink: 0; /* Verhindert, dass das Bild schrumpft */
+            margin-right: 5%;
+        }
+
+
+        .MAVIS-terminal-4 {
+            height: 400vw;
+            width: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding: 5vw; /* Vermeidet Text, der an Bildschirmrändern klebt */
+        }
+
+        .MAVIS-terminal-4 h1 {
+            font-size: clamp(3rem, 6vw, 9rem); /* Dynamische Schriftgröße */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s infinite linear;
+            text-align: center;
+            margin: 0;
+            position: relative; /* Positionierung muss relativ oder absolut sein */
+        }
+
+        .MAVIS-terminal-4 h3 {
+            font-size: clamp(0.6rem, 1.5vw, 1.8rem); /* kleiner, aber weiterhin responsiv */
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent; /* Für Safari */
+            color: transparent; /* Fallback für andere Browser */
+            text-align: center;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .card {
+          padding: 1rem;
+          overflow: hidden;
+          border: 1px solid #c5c5c5;
+          border-radius: 12px;
+          background-color: #d9d9d92f;
+          backdrop-filter: blur(8px);
+          width: 20%;
+        }
+
+        .wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          position: relative;
+          z-index: 10;
+          border: 0.5px solid #525252;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+
+        .terminal {
+          display: flex;
+          flex-direction: column;
+
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+            "Liberation Mono", "Courier New", monospace;
+        }
+
+        .head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          overflow: hidden;
+          min-height: 40px;
+          padding-inline: 12px;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          background-color: #202425;
+        }
+
+        .title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          height: 2.5rem;
+          user-select: none;
+          font-weight: 600;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #8e8e8e;
+        }
+
+        .title > svg {
+          height: 18px;
+          width: 18px;
+          margin-top: 2px;
+          color: #006adc;
+        }
+
+        .copy_toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.25rem;
+          border: 0.65px solid #c1c2c5;
+          margin-left: auto;
+          border-radius: 6px;
+          background-color: #202425;
+          color: #8e8e8e;
+          cursor: pointer;
+        }
+
+        .copy_toggle > svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .copy_toggle:active > svg > path,
+        .copy_toggle:focus-within > svg > path {
+          animation: clipboard-check 500ms linear forwards;
+        }
+
+        .body {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 8px;
+          overflow-x: auto;
+          padding: 1rem;
+          line-height: 19px;
+          color: white;
+          background-color: black;
+          white-space: nowrap;
+        }
+
+        .pre {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          text-wrap: nowrap;
+          white-space: pre;
+          background-color: transparent;
+          overflow: hidden;
+          box-sizing: border-box;
+          font-size: 16px;
+        }
+
+        .pre code:nth-child(1) {
+          color: #575757;
+        }
+
+        .pre code:nth-child(2) {
+          color: #e34ba9;
+        }
+
+        .cmd {
+          height: 19px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+        }
+
+        .cmd::before {
+          content: attr(data-cmd);
+          position: relative;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          background-color: transparent;
+          animation: inputs 8s steps(22) infinite;
+        }
+
+        .cmd::after {
+          content: "";
+          position: relative;
+          display: block;
+          height: 100%;
+          overflow: hidden;
+          background-color: transparent;
+          border-right: 0.15em solid #e34ba9;
+          animation: cursor 0.5s step-end infinite alternate, blinking 0.5s infinite;
+        }
+
+        @keyframes blinking {
+          20%,
+          80% {
+            transform: scaleY(1);
+          }
+          50% {
+            transform: scaleY(0);
+          }
+        }
+
+        @keyframes cursor {
+          50% {
+            border-right-color: transparent;
+          }
+        }
+
+        @keyframes inputs {
+          0%,
+          100% {
+            width: 0;
+          }
+          10%,
+          90% {
+            width: 58px;
+          }
+          30%,
+          70% {
+            width: 215px;
+            max-width: max-content;
+          }
+        }
+
+        @keyframes clipboard-check {
+          100% {
+            color: #fff;
+            d: path(
+              "M 9 5 H 7 a 2 2 0 0 0 -2 2 v 12 a 2 2 0 0 0 2 2 h 10 a 2 2 0 0 0 2 -2 V 7 a 2 2 0 0 0 -2 -2 h -2 M 9 5 a 2 2 0 0 0 2 2 h 2 a 2 2 0 0 0 2 -2 M 9 5 a 2 2 0 0 1 2 -2 h 2 a 2 2 0 0 1 2 2 m -6 9 l 2 2 l 4 -4"
+            );
+          }
+        }
+
+        .list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            width: 60%;
+        }
+
+        .list > div {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 25%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .mavis-image-3 {
+            position: relative; /* Damit 'left' für das Bild funktioniert */
+        }
+
+        .mavis-image-3 img {
+            position: relative;  /* Setzt das Bild relativ zu seinem Container */
+            left: 5%;           /* Verschiebt das Bild 20% nach rechts */
+            border-radius: 15px; /* Rundung der Ecken */
+            width: 90%;          /* Setzt die Breite des Bildes auf 60% */
+        }
+
+        .mavis-image-3-term {
+            position: relative; /* Damit 'left' für das Bild funktioniert */
+        }
+
+        .mavis-image-3-term img {
+            position: relative;  /* Setzt das Bild relativ zu seinem Container */
+            left: 20%;           /* Verschiebt das Bild 20% nach rechts */
+            border-radius: 8px; /* Rundung der Ecken */
+            width: 60%;          /* Setzt die Breite des Bildes auf 60% */
+        }
+
+        .mavis-image-3-lau {
+            position: relative; /* Damit 'left' für das Bild funktioniert */
+        }
+
+        .mavis-image-3-lau img {
+            position: relative;  /* Setzt das Bild relativ zu seinem Container */
+            left: 10%;           /* Verschiebt das Bild 20% nach rechts */
+            border-radius: 8px; /* Rundung der Ecken */
+            width: 75%;          /* Setzt die Breite des Bildes auf 60% */
+        }
+
+        .mavis-image-4 {
+            position: relative; /* Damit 'left' für das Bild funktioniert */
+            overflow: visible !important; /* Stellt sicher, dass das Bild nicht abgeschnitten wird */
+        }
+
+        .mavis-image-4 img {
+            position: absolute;
+            top: -400px; /* Verschiebt das Bild 100px nach oben */
+            left: 55%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 25%; /* Stellt die Breite des Bildes ein */
+            z-index: 999; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
+        }
+
+        .mavis-image-5 {
+            position: relative; /* Macht die Positionierung des Bildes relativ zur Box möglich */
+            overflow: visible !important; /* Stellt sicher, dass das Bild nicht abgeschnitten wird */
+        }
+
+        .mavis-image-5 img {
+            position: absolute;
+            top: -650px; /* Verschiebt das Bild 100px nach oben */
+            left: 70%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 25%; /* Stellt die Breite des Bildes ein */
+            z-index: 999; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
+        }
+
+        .mavis-image-6 {
+            position: relative; /* Damit 'left' für das Bild funktioniert */
+            overflow: visible !important; /* Stellt sicher, dass das Bild nicht abgeschnitten wird */
+        }
+
+        .mavis-image-6 img {
+            position: absolute;
+            top: -550px; /* Verschiebt das Bild 100px nach oben */
+            left: 65%; /* Zentriert das Bild horizontal */
+            border-radius: 15px;
+            width: 25%; /* Stellt die Breite des Bildes ein */
+            z-index: 999; /* Stellt sicher, dass das Bild über anderen Elementen liegt */
+        }
+
+        .MAVIS-launcher-4 {
+            height: 130vw;
+            width: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding: 5vw;
+        }
+
+        .MAVIS-launcher-4 h1 {
+            font-size: clamp(3rem, 6vw, 9rem);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(90deg, #a8a8a8, #ffffff, #ffffff, #cdcdcd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s infinite linear;
+            text-align: center;
+            margin: 0;
+            position: relative;
+        }
+
+        .end-main {
+            display: flex;  /* Aktiviert Flexbox */
+            flex-direction: row;  /* Stellt sicher, dass die Boxen nebeneinander angezeigt werden */
+            justify-content: center;  /* Optional: Zentriert die Boxen horizontal */
+            align-items: center;  /* Optional: Zentriert die Boxen vertikal */
+            gap: 300px;  /* Fügt einen Abstand zwischen den Boxen hinzu */
+            background-color: #ffffff;  /* Setzt die Hintergrundfarbe auf Weiß */
+            height: 16vw;
+        }
+
+        .end {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100px;
+            max-height: 400px;
+            width: 200px;  /* Beispiel-Breite für die .end Boxen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .abschluss_info_blur {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            min-width: 350px;
+            max-width: 1000px;
+            height: auto;
+        }
+
+        .abschluss_info_blur:hover {
+            background-color: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: scale(1.03);
+        }
+
+        .abschluss_info_blur-3 {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            min-width: 500px;
+            max-width: 1000px;
+            height: auto;
+        }
+
+        .abschluss_info_blur-3:hover {
+            background-color: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: scale(1.03);
+        }
+
+        .verweis_liste {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .verweis_liste li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .verweis_liste a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .verweis_liste a:hover {
+            font-size: 1.3rem;
+        }
+
+        .link_icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 600px) {
+            .abschluss_info_blur {
+                padding: 20px 25px;
+            }
+
+            .verweis_liste a {
+                font-size: 0.95rem;
+            }
+
+            .link_icon {
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+            }
+        }
+
+        .butten-div-p-term {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 6vh;
+            width: 100%;
+            gap: 3rem;
+        }
+
+        .button-github-p-term {
+            left: 42%;
+            width: 16%;
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            gap: 3rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-github-p-term svg {
+            height: 35px;
+        }
+
+        .button-github-p-term:hover {
+            background-color: rgba(240, 240, 240, 0.5);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+            border-left: 2px rgba(255, 255, 255, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: translateY(-20%);
+        }
+
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>MAVIS</h1><br>
+        <h3><strong>MAth Visual Intelligent System </strong><br>- Strongest calculator in the world -</h3>
+        <div class="text-box">
+            <h2>MAVIS Launcher</h2>
+            <p>MAVIS Installer 1.2</p>
+            <p>MAVIS Installer 1.3</p>
+            <p>MAVIS Launcher 3</p>
+            <p>MAVIS Launcher 4 EAP (NEW)</p>
+            <p>MAVIS Launcher 4 (SOON)</p>
+        </div>
+        <div class="text-box2">
+            <h2>MAVIS</h2>
+            <p>MAVIS 1</p>
+            <p>MAVIS 1.2</p>
+            <p>MAVIS 1.2.3</p>
+            <p>MAVIS 1.3</p>
+            <p>MAVIS 1.4</p>
+            <p>MAVIS 1.5</p>
+            <p>MAVIS 1.5.3</p>
+            <p>MAVIS 3</p>
+            <p>MAVIS 3.3</p>
+            <p>MAVIS 4 EAP (NEW)</p>
+            <p>MAVIS 4 (SOON)</p>
+            <p>MAVIS 4.3 EAP (NEW)</p>
+            <p>MAVIS 4.3 (SOON)</p>
+        </div>
+        <div class="text-box3">
+            <h2>MAVIS Terminal</h2>
+            <p>MAVIS Terminal 3</p>
+            <p>MAVIS Terminal 4</p>
+            <p>MAVIS Terminal 5 EAP (NEW)</p>
+            <p>MAVIS Terminal 5 (SOON)</p>
+            <p>---</p>
+            <p>P-Terminal 1 (SOON)</p>
+            <p>PP-Terminal 4.3 EAP (NEW)</p>
+            <p>PP-Terminal 4.3 (SOON)</p>
+
+        </div>
+    </section>
+
+    <section class="github">
+        <br><br><br><br><br><br><br>
+        <div class="butten-div-p-term">
+            <button class="button-github" onclick="window.open('https://github.com/Peharge/MAVIS', '_blank')">
+                 <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>github</title> <rect fill="none" height="24" width="24"></rect> <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"></path> </g></svg>
+                 MAVIS on GitHub
+            </button>
+            <button class="button-mavis" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/mavis-launcher-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 - Windows
+            </button>
+            <button class="button-mavis-lx" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/install-on-larch-lx.md', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 - Linux
+            </button>
+            <button class="button-mavis-terminal" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 4 - Windows
+            </button>
+            <button class="button-mavis-terminal-5" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-5.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 5 - Windows
+            </button>
+        </div>
+
+        <br><br><br>
+
+        <div class="butten-div-p-term">
+            <button class="button-github-p-term" onclick="window.open('https://github.com/Peharge/p-terminal', '_blank')">
+                <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>github</title> <rect fill="none" height="24" width="24"></rect> <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"></path> </g></svg>
+                P-Terminal GitHub
+            </button>
+            <button class="button-github-p-term" onclick="window.open('p-term.html', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                 NEW P-Terminal
+            </button>
+            <button class="button-github-p-term" onclick="window.open('download-pp-term.html', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                Download PP-Term 5 - Windows
+            </button>
+            <button class="button-github-p-term" onclick="window.open('https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                Download P-Term 1 - Windows - SOON
+            </button>
+        </div>
+    </section>
+
+    <section class="versions">
+        <div class="version-box">
+            <div class="logo">
+                <img src="icons/mavis-logo.ico" alt="Company Logo">
+                <h2><br>MAVIS 1.2</h2>
+            </div>
+            <h3><strong>FREE</strong></h3>
+            <p>MAVIS 1.2 main<br><br>MAVIS 1.2 math<br><br>MAVIS 1.2 code</p>
+        </div>
+        <div class="version-box">
+            <div class="logo-3">
+                <img src="icons/MAVIS-3-logo-1.ico" alt="Company Logo">
+                <h2><br>MAVIS 3</h2>
+            </div>
+            <h3><strong>FREE</strong></h3>
+            <p>MAVIS 3 main<br><br>MAVIS 3 math<br><br>MAVIS 3 code</p>
+        </div>
+        <div class="version-box">
+            <div class="logo-4">
+                <img src="images/mavis-4-icon-3.png" alt="Company Logo">
+                <h2><br><strong>MAVIS 4</strong></h2>
+            </div>
+            <h3><strong>FREE</strong></h3>
+            <p>Access Over <strong>200</strong> Leading LLMs – All in One Platform.</p>
+        </div>
+        <div class="version-box">
+            <div class="logo-3">
+                <img src="icons/MAVIS-3-logo-1.ico" alt="Company Logo">
+                <h2><br>MAVIS 3.3</h2>
+            </div>
+            <h3><strong>FREE</strong></h3>
+            <p>MAVIS 3.3 main<br><br>MAVIS 3.3 math<br><br>MAVIS 3.3 code</p>
+        </div>
+        <div class="version-box">
+            <div class="logo">
+                <img src="icons/MAVIS-3-logo-3.ico" alt="Company Logo">
+                <h2><br>MAVIS 1.5</h2>
+            </div>
+            <h3><strong>FREE</strong></h3>
+            <p>MAVIS 1.5 main<br><br>MAVIS 1.5 math<br><br>MAVIS 1.5 code</p>
+        </div>
+    </section>
+
+    <section class="MAVIS-4">
+        <br><br><br><h1>MAVIS 4</h1><br>
+        <h3>Do you think you're better at math than an AI? Prove it! Show that there are infinitely many pairs of prime numbers that are exactly 2 apart. No proof? No answer? Well – maybe it can't be done without AI after all! What are you waiting for? Ask MAVIS!</h3><br><br>
+        <br>
+        <div class="butten-div-p-term">
+            <button class="button-github" onclick="window.open('https://github.com/Peharge/MAVIS', '_blank')">
+                 <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>github</title> <rect fill="none" height="24" width="24"></rect> <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"></path> </g></svg>
+                 MAVIS on GitHub
+            </button>
+            <button class="button-mavis" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/mavis-launcher-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 Windows
+            </button>
+            <button class="button-mavis-lx" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/install-on-larch-lx.md', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 Linux
+            </button>
+            <button class="button-mavis-terminal" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 4
+            </button>
+            <button class="button-mavis-terminal-5" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-5.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 5
+            </button>
+        </div>
+        <br><br><br>
+        <div class="mavis-image-3">
+            <img src="images/mavis-4-banner-pc.png" alt="Company Logo">
+        </div>
+            <div class="content-container-1">
+                <div class="text-container">
+                    <p>Meet MAVIS – your free and open-source math sidekick, built for the benefit of all. MAVIS (Math Visual Intelligent System) is a powerful AI-powered assistant that can solve complex math problems, generate precise visualizations, and explain abstract concepts with clarity. It supports analysis of multiple input formats — including images (PNG, JPG, JPEG, GIF).</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-1">
+                        <img src="images/mavis-image-up.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-0">
+                <div class="text-container">
+                    <p>And also text/code documents (TXT, PDF, PY, DOC, DOCX)</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-1">
+                        <img src="images/mavis-image-pdf.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-2">
+                <div class="text-container">
+                    <p>MAVIS can instead display formulas in LaTeX to ensure precise and attractive formatting.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/mavis-latex-image-3.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS can instead always write code in Python, as this is the only language supported by the user interface.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/mavis-code-image.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS 4.3 enables professional execution of code in Python, C and C++ – powerful, reliable and efficient.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/python-c-cpp-3.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>With MAVIS you can perform complex mathematical calculations, solve programming tasks and create professional graphics, using Matplotlib, Plotly, Seaborn, Bokeh, Mayavi, Manim or Altair</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/mavis-graf-image.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS comes pre-loaded with a range of powerful scientific libraries, including NumPy, Math, SymPy, Pandas, AstroPy, QuantLib, OpenMDAO, pybullet, MONAI – with more on the way, including PyTorch, TensorFlow, Keras, Scikit-Learn, Hugging Face Transformers, JAX, and more.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/MAVIS-demo121.gif" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS can instead use its powerful features to make your projects more efficient and professional.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/mavis-jup-image.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>And more...</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/more.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+    <section class="MAVIS-terminal-4">
+        <h1>MAVIS Terminal 5</h1><br>
+        <h3>Harness the power of MAVIS, Python, PIP, Ollama, Git, vLLM, PowerShell, and a vast array of Linux distributions—including Ubuntu, Debian, Arch Linux, Kali Linux, openSUSE, Mint, Fedora, and Red Hat—all within a single terminal on Windows!</h3><br><br>
+
+        <div class="butten-div-p-term">
+            <button class="button-github-p-term" onclick="window.open('https://github.com/Peharge/p-terminal', '_blank')">
+                <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>github</title> <rect fill="none" height="24" width="24"></rect> <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"></path> </g></svg>
+                P-Terminal GitHub
+            </button>
+            <button class="button-github-p-term" onclick="window.open('p-term.html', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                 NEW P-Terminal
+            </button>
+            <button class="button-github-p-term" onclick="window.open('download-pp-term.html', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                Download PP-Term 5 - Windows
+            </button>
+            <button class="button-github-p-term" onclick="window.open('https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat', '_blank')">
+                <img src="./icons/p-term-logo-5.png" alt="GitHub Logo" style="height: 35px;">
+                Download P-Term 1  - Windows - SOON
+            </button>
+        </div>
+
+        <br><br>
+
+        <div class="butten-div-p-term">
+            <button class="button-mavis-terminal" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 4 - Windows
+            </button>
+            <button class="button-mavis-terminal-5" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-5.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 5 - Windows
+            </button>
+        </div>
+
+        <br>
+
+        <div class="mavis-image-3-term">
+                <img src="images/mavis-terminal-5-img.png" alt="Company Logo">
+        </div>
+        <div class="list">
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>m&nbsp;</code>
+                      <code class="cmd" data-cmd="models ls"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>m&nbsp;</code>
+                      <code class="cmd" data-cmd="git"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>m&nbsp;</code>
+                      <code class="cmd" data-cmd="htop"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>run&nbsp;</code>
+                      <code class="cmd" data-cmd="mavis-4"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>run&nbsp;</code>
+                      <code class="cmd" data-cmd="qwen-2-5-omni"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>run&nbsp;</code>
+                      <code class="cmd" data-cmd="llama-4-17b"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>image&nbsp;</code>
+                      <code class="cmd" data-cmd="generation"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>video&nbsp;</code>
+                      <code class="cmd" data-cmd="generation"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>lx&nbsp;</code>
+                      <code class="cmd" data-cmd="neofetch"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>lx&nbsp;</code>
+                      <code class="cmd" data-cmd="emacs"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>lx&nbsp;</code>
+                      <code class="cmd" data-cmd="emacs test.py"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>ubuntu&nbsp;</code>
+                      <code class="cmd" data-cmd="ls"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>kali&nbsp;</code>
+                      <code class="cmd" data-cmd="iwconfig"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>arch&nbsp;</code>
+                      <code class="cmd" data-cmd="nano test.py"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="wrap">
+                <div class="terminal">
+                  <hgroup class="head">
+                    <p class="title">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
+                        ></path>
+                      </svg>
+                      MAVIS Terminal
+                    </p>
+
+                    <button class="copy_toggle" tabindex="-1" type="button">
+                      <svg
+                        width="16px"
+                        height="16px"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+                        ></path>
+                        <path
+                          d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </hgroup>
+
+                  <div class="body">
+                    <pre class="pre">          <code>-&nbsp;</code>
+                      <code>arch&nbsp;</code>
+                      <code class="cmd" data-cmd="htop"></code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="mavis-image-5">
+                <img src="images/m-git-img.png" alt="Company Logo">
+        </div>
+        <div class="mavis-image-6">
+                <img src="images/m-htop-img.png" alt="Company Logo">
+        </div>
+        <div class="mavis-image-4">
+                <img src="images/m-models-ls-img.png" alt="Company Logo">
+        </div>
+
+        <div class="content-container-0">
+                <div class="text-container">
+                    <p>The MAVIS Terminal combines cutting-edge design with intelligent performance – delivering a seamless, future-ready experience for users and businesses alike.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-1">
+                        <img src="images/neofetch.png" alt="Bild 1">
+                    </div>
+                </div>
+        </div>
+
+        <div class="content-container-2">
+                <div class="text-container">
+                    <p>The MAVIS Terminal 5 supports a wide range of Linux distributions, offering maximum flexibility and compatibility.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/lx-neofetch.png" alt="Bild 1">
+                    </div>
+                </div>
+        </div>
+
+        <div class="content-container-3">
+                <div class="text-container">
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="" alt="Bild 1">
+                    </div>
+                </div>
+        </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS Terminal 5 includes a graphical interface that lets you explore and select from a wide range of LLM models – ready to deploy and use instantly.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/m-models-ls.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>The MAVIS Terminal 5 features a powerful graphical interface that lets you view all available commits, track your installed versions, and review configuration-based changes – all in one intuitive dashboard.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/m-git.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>The MAVIS Terminal 5 includes a built-in graphical interface that functions like a Task Manager, allowing you to monitor and manage running processes with ease.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/m-htop-3.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS Terminal 5 also features a built-in graphical file manager, making it easy to browse, organize, and manage files with a user-friendly interface.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/m-ls.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS Terminal 5 collaborates with SIMON, also developed by MAVIS developers, to utilize cutting-edge imaging technologies and enable more precise cancer diagnoses. Through innovative procedures such as X-rays, CT, MRI, PET, DEXA, and fluoroscopy, the system helps gain vital time and improve the chances of recovery. MAVIS Terminal 5 – Technology that saves lives.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/simon.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>The MAVIS Terminal 5 includes an interactive browser, allowing you to easily visit websites like ollama.com by simply typing commands like "m ollama.com".</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/m-ollama.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS Terminal 5 lets you interact with various Linux distributions, enabling you to launch applications like Emacs directly through the interactive interface.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/lx-emacs.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>Switch between Linux distros and open apps like Doom Emacs with ease – MAVIS Terminal 5 gives you full control with its interactive interface.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/ubuntu-doom-run.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>With MAVIS Terminal 5, you can open and interact with the Emacs interface directly within the terminal design, providing a powerful and efficient workspace for development and editing.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/arch-emacs.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>With MAVIS Terminal 5, you can seamlessly open any file with Nano, whether you're browsing through the Windows File Explorer or within the terminal itself, offering ultimate flexibility and convenience.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/arch-nano.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>MAVIS Terminal 5 allows you to easily launch and interact with system tools like htop directly within the terminal, providing real-time system monitoring and management at your fingertips.</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/arch-htop.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section class="MAVIS-launcher-4">
+        <h1>MAVIS Launcher 4</h1><br><br><br>
+                <div class="butten-div-p-term">
+            <button class="button-github" onclick="window.open('https://github.com/Peharge/MAVIS', '_blank')">
+                 <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <title>github</title> <rect fill="none" height="24" width="24"></rect> <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"></path> </g></svg>
+                 MAVIS on GitHub
+            </button>
+            <button class="button-mavis" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/mavis-launcher-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 - Windows
+            </button>
+            <button class="button-mavis-lx" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/install-on-larch-lx.md', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Launcher 4 - Linux
+            </button>
+            <button class="button-mavis-terminal" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-4.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 4 - Windows
+            </button>
+            <button class="button-mavis-terminal-5" onclick="window.open('https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-5.bat', '_blank')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1614 1689" stroke-width="6.875" fill="currentColor" stroke="#042433" class="icon2" id="icon-toggle-dddd"><g transform="translate(-1389 -393)">
+                    <path d="M2518.46 407.665 3003 1594.62 2662.79 1594.62 2351.21 822.411ZM1878.35 393 2381.46 1635.86 2203.45 2082 1880.42 1280.01 1754.64 1594.62 1389 1594.62Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g></svg>
+                 Download MAVIS Terminal 5 - Windows
+            </button>
+        </div>
+        <br><br><br>
+        <div class="mavis-image-3-lau">
+                <img src="images/mavis-launcher-4-img.png" alt="Company Logo">
+        </div>
+            <div class="content-container-1">
+                <div class="text-container">
+                    <p>Experience effortless and secure installations with the MAVIS 4 Launcher – your central solution to keep everything up to date and optimally protected in a flash!
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-1">
+                        <img src="images/mavis-launcher-4-img-3.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-2">
+                <div class="text-container">
+                    <p>Discover the power of over 200 LLM models with the MAVIS 4 Launcher! Use leading AI technologies like ChatGPT-4.5o, o1, Gemini 2.5, and Claude 3.7 – all in one place, ready to use anytime. Get MAVIS 4 and take your AI experience<br> to the next level!</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-2">
+                        <img src="images/mavis-launcher-4-img-4.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-container-3">
+                <div class="text-container">
+                    <p>Use any browser you want!!!</p>
+                </div>
+                <div class="image-container">
+                    <div class="image-stack-3">
+                        <img src="images/mavis-launcher-4-img-5.png" alt="Bild 1">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section class="anim-section">
+    <div class="anim-container">
+      <!-- Erste Reihe: Box 1 bis 10 -->
+      <div class="anim-row" style="--anim-delay: 0s;">
+        <div class="anim-track">
+            <div class="anim-box">Xc++ I</div>
+            <div class="anim-box">Xc++ II</div>
+            <div class="anim-box">Xc++ III</div>
+            <div class="anim-box">Xc++ IV</div>
+            <div class="anim-box">Deep Seek R1</div>
+            <div class="anim-box">Deep Seek V3</div>
+            <div class="anim-box">Gemma 3</div>
+            <div class="anim-box">Gemma 2</div>
+            <div class="anim-box">Qwen 2</div>
+            <div class="anim-box">Qwen 2.5</div>
+        </div>
+      </div>
+
+      <!-- Zweite Reihe: Box 11 bis 20 -->
+      <div class="anim-row" style="--anim-delay: 2s;">
+        <div class="anim-track">
+            <div class="anim-box">Llama 3</div>
+            <div class="anim-box">Llama 3.1</div>
+            <div class="anim-box">Llama 3.2</div>
+            <div class="anim-box">Llama 3.3</div>
+            <div class="anim-box">Llama 4</div>
+            <div class="anim-box">Qwen 2.5 Coder</div>
+            <div class="anim-box">QwQ</div>
+            <div class="anim-box">QvQ</div>
+            <div class="anim-box">Qwen 2.5 Omni</div>
+            <div class="anim-box">Qwen 2.5 VL</div>
+        </div>
+      </div>
+
+      <!-- Dritte Reihe: Box 21 bis 30 -->
+      <div class="anim-row" style="--anim-delay: 4s;">
+        <div class="anim-track">
+            <div class="anim-box">Qwen</div>
+            <div class="anim-box">Phi 4</div>
+            <div class="anim-box">Phi 3.5</div>
+            <div class="anim-box">Phi 3</div>
+            <div class="anim-box">DeepScaler</div>
+            <div class="anim-box">OpenThinker</div>
+            <div class="anim-box">Dolphin 3</div>
+            <div class="anim-box">SmallThinker</div>
+            <div class="anim-box">Falcon 3</div>
+            <div class="anim-box">Exaone 3.5</div>
+        </div>
+      </div>
+
+      <!-- Vierte Reihe: Box 31 bis 40 -->
+      <div class="anim-row" style="--anim-delay: 6s;">
+        <div class="anim-track">
+          <div class="anim-box">Sailor 2</div>
+          <div class="anim-box">Marco o1</div>
+          <div class="anim-box">Tulu 3</div>
+          <div class="anim-box">Athene V2</div>
+          <div class="anim-box">OpenCoder</div>
+          <div class="anim-box">Smollm 2</div>
+          <div class="anim-box">Llava</div>
+          <div class="anim-box">Granite 3.2</div>
+          <div class="anim-box">Olmo 2</div>
+          <div class="anim-box">Smollm</div>
+        </div>
+      </div>
+
+      <!-- Fünfte Reihe: Box 41 bis 50 -->
+      <div class="anim-row" style="--anim-delay: 8s;">
+        <div class="anim-track">
+            <div class="anim-box">Mistral Large</div>
+            <div class="anim-box">Mistral Nemo</div>
+            <div class="anim-box">Moondream</div>
+            <div class="anim-box">Mistral small 3.1</div>
+            <div class="anim-box">Minicpm v</div>
+            <div class="anim-box">Granite 3.2 vision</div>
+            <div class="anim-box">Llama 3.2 vision</div>
+            <div class="anim-box">Llava Llama3</div>
+            <div class="anim-box">Bak Llava</div>
+            <div class="anim-box">Llava Phi 3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+        :root {
+            --anim-min-box-width: 150px;
+            --anim-box-height: 120px;
+            --anim-box-padding: 0 20px;
+            --anim-box-margin: 10px;
+            --anim-duration: 20s;
+            --anim-row-gap: 20px;
+        }
+
+        section.anim-section {
+            width: 100%;
+            height: 55vw;
+            background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(255, 255, 255) 20%,
+                rgba(255, 255, 255) 100%);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .anim-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--anim-row-gap);
+            padding-top: 8%;
+        }
+
+        .anim-row:nth-child(1) { transform: translateX(0); }
+        .anim-row:nth-child(2) { transform: translateX(10px); }
+        .anim-row:nth-child(3) { transform: translateX(20px); }
+        .anim-row:nth-child(4) { transform: translateX(30px); }
+        .anim-row:nth-child(5) { transform: translateX(40px); }
+
+        .anim-track {
+            display: flex;
+            width: max-content;
+            animation: animSlide var(--anim-duration) linear infinite;
+            animation-delay: var(--anim-delay, 0s);
+        }
+
+        .anim-box {
+            min-width: var(--anim-min-box-width);
+            height: var(--anim-box-height);
+            padding: var(--anim-box-padding);
+            margin: var(--anim-box-margin);
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+            user-select: none;
+            white-space: nowrap;
+            width: 15vw;
+            font-size: clamp(1rem, 1.3vw, 1.5rem);
+        }
+
+        .anim-box:hover {
+            background-color: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.440);
+            border-left: 2px rgba(0, 0, 0, 0.545) outset;
+            box-shadow: 20px 30px 15px rgba(0, 0, 0, 0.280);
+            transform: scale(1.03);
+        }
+
+        @keyframes animSlide {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .headline-3 {
+            display: flex; /* Flexbox aktivieren */
+            justify-content: center; /* Horizontal zentrieren */
+            align-items: center; /* Vertikal zentrieren */
+            flex-direction: column; /* Elemente untereinander anordnen */
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <br><br><br><br><br>
+
+    <div class="end-main">
+        <div class="end">
+            <div class="abschluss_info_blur">
+                <ul class="verweis_liste">
+                    <li>
+                        <a href="https://github.com/Peharge" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            GitHub Peharge
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/MAVIS" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            MAVIS Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/MAVIS-images" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            MAVIS Images Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/MAVIS-web" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            MAVIS Web Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/p-terminal" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            P-Terminal Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/p-terminal-images" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            P-Terminal Images Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/p-terminal-old" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="link_icon" style="filter: brightness(0) invert(1); /* Weiß */">
+                            P-Terminal Old Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://huggingface.co/Peharge" target="_blank">
+                            <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" class="link_icon">
+                            Hugging Face Peharge
+                        </a>
+                    </li>
+                    <li>
+                        <a href="p-term.html" target="_blank">
+                            <img src="./icons/p-term-logo-5.png" alt="Hugging Face" class="link_icon">
+                            P-Terminal.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="end">
+            <div class="abschluss_info_blur">
+                <ul class="verweis_liste">
+                    <li>
+                      <a href="#" onclick="window.open('impressum.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon" style="height: 35px;">
+                        Impressum
+                      </a>
+                    </li>
+                    <li>
+                        <a href="license.html" target="_blank">
+                            <img src="./icons/info.svg" alt="License" class="link_icon">
+                            MAVIS Licence
+                        </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('security.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Security MAVIS
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('contributing.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Contributing MAVIS
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('code_of_conduct.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Code of Conduct MAVIS
+                      </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/MAVIS/blob/main/learn-mavis/README.md" target="_blank">
+                            <img src="./icons/info.svg" alt="License" class="link_icon">
+                            Learn MAVIS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="license-p-terminal.html" target="_blank">
+                            <img src="./icons/info.svg" alt="License" class="link_icon">
+                            P-Terminal Licence
+                        </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('security-p-terminal.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Security P-Terminal
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('contributing-p-terminal.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Contributing P-Terminal
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="window.open('code_of_conduct-p-terminal.html', '_blank'); return false;">
+                        <img src="./icons/info.svg" alt="License" class="link_icon">
+                        Code of Conduct P-Terminal
+                      </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="end">
+            <div class="abschluss_info_blur-3">
+                <ul class="verweis_liste">
+                    <li>
+                        <a href="https://raw.githubusercontent.com/Peharge/MAVIS/main/mavis-launcher-4.bat" target="_blank">
+                            <img src="./icons/mavis-logo-new.png" alt="License" class="link_icon">
+                            Download MAVIS Launcher 4 - Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/MAVIS/blob/main/install-on-larch-lx.md" target="_blank">
+                            <img src="./icons/mavis-logo-new.png" alt="License" class="link_icon">
+                            Download MAVIS Launcher 4 - Linux
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-5.bat" target="_blank">
+                            <img src="./icons/mavis-logo-new.png" alt="License" class="link_icon">
+                            Download MAVIS Terminal 5 - Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://raw.githubusercontent.com/Peharge/MAVIS/main/run-mavis-terminal-4.bat" target="_blank">
+                            <img src="./icons/mavis-logo-new.png" alt="License" class="link_icon">
+                            Download MAVIS Terminal 4 - Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="download-pp-term.html" target="_blank">
+                            <img src="./icons/p-term-logo-5.png" alt="License" class="link_icon">
+                            Download PP-Term 5 - Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat" target="_blank">
+                            <img src="./icons/p-term-logo-5.png" alt="License" class="link_icon">
+                            Download P-Term 1 - Windows - SOON
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<br><br><br><br><br><br><br><br>
+
+  <div class="headline-3">
+    <h1 style="font-size: 1.8rem;">MAth Visual Intelligent System</h1><br>
+    <p>Peharge Projects 2025</p>
+  </div>
+
+<br><br><br>
+
+</body>
+</html>
