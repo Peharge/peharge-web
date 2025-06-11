@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>run-pp-term.bat - Ultra</title>
+  <link rel="icon" type="image/x-icon" href="icons/mavis-logo-new.png" />
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #111 60%, #7b0202 100%);
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 2rem;
+    }
+  .button-container {
+    display: flex;
+    flex-direction: column;  /* vertikal stapeln */
+    align-items: center;     /* horizontal zentrieren */
+    gap: 25px;               /* Abstand zwischen Button und evtl. anderen Elementen */
+    margin-bottom: 15px;
+    text-align: center;
+  }
+            .terminal-button-5 {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      color: #fff;
+      background: #111;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 20px;
+      border-radius: 10px;
+      padding: 18px 44px;
+      border: none;
+      min-width: 200px;
+      overflow: hidden;
+      z-index: 0;
+      isolation: isolate;
+      box-shadow: 0 0 14px #fff;
+        transition: background 0.5s, color 0.5s, transform 0.5s;
+    }
+
+    .terminal-button-5::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 3px; /* Dicke des animierten Rands */
+      border-radius: 10px;
+      background: linear-gradient(115deg, #b6e1b6, #2e8b57, #a8d5a2, #eaffea, #2e8b57, #b6e1b6);
+      background-size: 400% 100%;
+      animation: border-glow 3s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+    }
+
+    .terminal-button-5 > .terminal-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      background: #111;
+      border-radius: 8px;
+      width: 100%;
+      gap: 15px;
+      padding: 0;
+        transition: background 0.5s, color 0.5s, transform 0.5s;
+    }
+
+    .terminal-button-5 .terminal-label {
+      padding: 0;
+      margin: 0;
+    }
+
+    .terminal-button-5 .terminal-icon {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      background-image: url('https://img.icons8.com/ios_filled/512/FFFFFF/windows-11.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s, width 0.3s, height 0.3s;
+    }
+
+    .terminal-button-5:hover .terminal-icon {
+      width: 29px;
+      height: 29px;
+      background-image: url('https://img.icons8.com/ios_filled/512/000000/windows-11.png');
+    }
+
+    .terminal-button-5:hover > .terminal-content {
+      background: #fff;
+      color: #000;
+        transition: background 0.5s, color 0.5s;
+        transform: scale(1.06);
+    }
+
+    .terminal-button-5:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.06);
+    }
+
+    @keyframes border-glow {
+      to {
+        background-position-x: -300%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <div>You have now rights!!! - Sorry ;-) - Please use run-pp-term.bat - Basic!!!<br><br>
+    <p style="font-size: 1rem; margin: 0;">To install PP-Terminal, copy the code from the run-pp-term.bat file ↓. <br>Then, create a new file named run-pp-term.bat in Visual Studio Code (or a similar editor) and paste the copied code into it. <br>Save the file and run it – experience the powerful performance your workflow deserves.</p></div>
+    <button class="terminal-button-5" onclick="window.open('https://raw.githubusercontent.com/Peharge/p-terminal/main/pp-term/run-pp-term.bat', '_blank')">
+      <span class="terminal-content">
+        <span class="terminal-label">run-pp-term.bat - Basic</span>
+        <span class="terminal-icon"></span>
+      </span>
+    </button>
+  </div>
+</body>
+</html>
