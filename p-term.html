@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>MAVIS - P-Terminal</title>
+  <link rel="icon" type="image/x-icon" href="icons/mavis-logo-new.png" />
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Stile für das .headline div */
+    .headline {
+        display: flex; /* Flexbox aktivieren */
+        justify-content: center; /* Horizontal zentrieren */
+        align-items: center; /* Vertikal zentrieren */
+    }
+
+    .headline-3 {
+        display: flex; /* Flexbox aktivieren */
+        justify-content: center; /* Horizontal zentrieren */
+        align-items: center; /* Vertikal zentrieren */
+        flex-direction: column; /* Elemente untereinander anordnen */
+        margin: 0;
+        padding: 0;
+    }
+
+    .headline-3 > * {
+        margin-bottom: -8px; /* Negative Marge für die Kinder anwenden */
+    }
+
+    .headline-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+
+    .headline-4.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Kinder einzeln verzögert */
+    .headline-4 > * {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .headline-4.in-view > * {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Verzögerung pro Kind */
+    .headline-4.in-view > *:nth-child(1) { transition-delay: 0.3s; }
+    .headline-4.in-view > *:nth-child(2) { transition-delay: 0.6s; }
+    .headline-4.in-view > *:nth-child(3) { transition-delay: 0.9s; }
+    /* ... füge weitere hinzu bei Bedarf */
+
+
+    /* Grundlegende Stile für das h1 */
+    .headline h1 {
+        font-family: 'Courier New', monospace;
+        font-size: clamp(1.5rem, 2vw, 2.5rem);
+        color: #fff; /* Grüne Farbe */
+        display: inline-block;
+        border-right: 3px solid black; /* Simuliert den Cursor-Effekt */
+        padding-right: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0; /* Start mit null Breite */
+        animation: typing 4s steps(40) 0s forwards, deleting 4s steps(40) 4s forwards; /* Versatz für das Löschen */
+        animation-iteration-count: infinite; /* Unendliche Wiederholung */
+    }
+
+    /* Animation für das Schreiben */
+    @keyframes typing {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 85%; /* Schreibe bis zu 85% der Breite */
+        }
+    }
+
+    /* Animation für das Löschen */
+    @keyframes deleting {
+        0% {
+            width: 85%; /* Beginnt mit der vollen Breite des geschriebenen Texts */
+        }
+        100% {
+            width: 0; /* Löscht den Text */
+        }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: -30px;
+    }
+
+    .logo img {
+      width: 25%;
+      max-width: 1000px;
+      filter: drop-shadow(0 0px 20px rgb(255, 255, 255)); /* Schatten nur um die Form des Logos */
+    }
+
+    .img-1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Bild: Grundzustand – versteckt und leicht unten */
+    .img-1 img {
+        width: 50%;
+        max-width: 2000px;
+        border-radius: 10px;
+        filter: drop-shadow(0 0px 10px rgb(255, 255, 255));
+
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1.8s ease, transform 1.8s ease;
+    }
+
+    /* Sichtbar mit Animation nach oben */
+    .img-1.in-view img {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 15px;
+    }
+
+    .button-container-3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 15px;
+    }
+
+    .terminal-button {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-button:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-3 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-button-3::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('https://img.icons8.com/ios_filled/512/FFFFFF/windows-11.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+    }
+
+    .terminal-button-3:hover::after {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://img.icons8.com/ios_filled/512/000000/windows-11.png');
+    }
+
+    .terminal-button-3:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-3-3 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 85%;
+    }
+
+    .terminal-button-3-3::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('https://img.icons8.com/ios_filled/512/FFFFFF/windows-11.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+    }
+
+    .terminal-button-3-3:hover::after {
+      width: 25px;
+      height: 25px;
+      background-image: url('https://img.icons8.com/ios_filled/512/000000/windows-11.png');
+    }
+
+    .terminal-button-3-3:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-4 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-button-4::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('icons/p-term-logo-5.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      filter: brightness(0) invert(1); /* Weiß */
+      margin-left: 15px;
+    }
+
+    .terminal-button-4:hover::after {
+      width: 25px;
+      height: 25px;
+      background-image: url('icons/p-term-logo-5.png');
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .terminal-button-4:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+        .terminal-button-4-3 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+          height: 85%;
+    }
+
+    .terminal-button-4-3::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('icons/p-term-logo-5.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      filter: brightness(0) invert(1); /* Weiß */
+      margin-left: 15px;
+    }
+
+    .terminal-button-4-3:hover::after {
+      width: 25px;
+      height: 25px;
+      background-image: url('icons/p-term-logo-5.png');
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .terminal-button-4-3:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-5 {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      color: #fff;
+      background: #111;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 20px;
+      border-radius: 10px;
+      padding: 18px 44px;
+      border: none;
+      min-width: 200px;
+      overflow: hidden;
+      z-index: 0;
+      isolation: isolate;
+      box-shadow: 0 0 14px #fff;
+        transition: background 0.5s, color 0.5s, transform 0.5s;
+    }
+
+    .terminal-button-5::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 3px; /* Dicke des animierten Rands */
+      border-radius: 10px;
+      background: linear-gradient(115deg, #d1d1d1, #02367b, #a7bfde, #fff, #02367b, #d1d1d1);
+      background-size: 400% 100%;
+      animation: border-glow 3s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+    }
+
+    .terminal-button-5 > .terminal-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      background: #111;
+      border-radius: 8px;
+      width: 100%;
+      gap: 15px;
+      padding: 0;
+        transition: background 0.5s, color 0.5s, transform 0.5s;
+    }
+
+    .terminal-button-5 .terminal-label {
+      padding: 0;
+      margin: 0;
+    }
+
+    .terminal-button-5 .terminal-icon {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      background-image: url('https://img.icons8.com/ios_filled/512/FFFFFF/windows-11.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s, width 0.3s, height 0.3s;
+    }
+
+    .terminal-button-5:hover .terminal-icon {
+      width: 29px;
+      height: 29px;
+      background-image: url('https://img.icons8.com/ios_filled/512/000000/windows-11.png');
+    }
+
+    .terminal-button-5:hover > .terminal-content {
+      background: #fff;
+      color: #000;
+        transition: background 0.5s, color 0.5s;
+        transform: scale(1.06);
+    }
+
+.terminal-button-5 {
+
+}
+
+.terminal-button-5:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.06);
+}
+
+    @keyframes border-glow {
+      to {
+        background-position-x: -300%;
+      }
+    }
+
+    .terminal-button-github {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-button-github::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .terminal-button-github:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .terminal-button-github:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-github-3 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 85%;
+    }
+
+    .terminal-button-github-3::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .terminal-button-github-3:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .terminal-button-github-3:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .terminal-button-huggingface {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .terminal-button-huggingface::after {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-image: url('https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/huggingface-ieplm3z71nlrt3qz5gujl.png/huggingface-epevjo31sauq02pf2urer.png?_a=DATAdtAAZAA0');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .terminal-button-huggingface:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .terminal-button-huggingface:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .mavis-button {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mavis-button::after {
+      content: "";
+      display: block;
+      width: 25px;
+      height: 25px;
+      background-image: url('./icons/mavis-logo-new.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .mavis-button:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .mavis-button:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+        .mavis-button-3 {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+          height: 85%
+    }
+
+    .mavis-button-3::after {
+      content: "";
+      display: block;
+      width: 25px;
+      height: 25px;
+      background-image: url('./icons/mavis-logo-new.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .mavis-button-3:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .mavis-button-3:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+    .arch-button {
+      background-color: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px 10px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .arch-button::after {
+      content: "";
+      display: block;
+      width: 25px;
+      height: 25px;
+      background-image: url('https://img.icons8.com/?size=512&id=6M7Il2xpbLYM&format=png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 15px;
+      filter: brightness(0) invert(1); /* Weiß */
+      transition: all 0.2s ease;
+    }
+
+    .arch-button:hover::after {
+      width: 25px;
+      height: 25px;
+      filter: brightness(0); /* Schwarz */
+    }
+
+    .arch-button:hover {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      transform: scale(1.06);
+    }
+
+
+    .terminal {
+      border-radius: 10px;
+      background-color: #111;
+      border: 1px solid #333;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #fff;
+    }
+
+    .terminal-3 {
+      border-radius: 10px;
+      border: 1px solid #fff;
+      padding: 20px;
+      margin-left: 15px; /* Optional: Setzt alle Ränder auf 0 */
+      width: 60%;
+    }
+
+    .terminal-4 {
+      border-radius: 10px;
+      background-color: #111;
+      border: 1px solid #333;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #fff;
+    }
+
+
+
+
+    .command {
+      margin-bottom: 20px;
+    }
+
+    .cmd {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .description {
+      color: #ccc;
+      margin-left: 20px;
+    }
+
+    a {
+      color: #1fb1ff;
+      text-decoration: none;
+      transition: text-shadow 0.3s ease;
+    }
+
+    a:hover {
+      color: #0066ff;
+      text-shadow: 0 0 10px #1fb1ff;
+    }
+
+    :root {
+      --gap: 2vw;
+      --bg: #111;
+      --radius: 0.5vw;
+      --shadow: 0 0 20px #fff;
+      --accent: #fff;
+      --text: #ccc;
+      --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --min-col-width: 300px; /* verhindert, dass Spalten zu schmal werden */
+        /* schon in deinem Stylesheet definiert */
+      --transition-speed: 0.35s;
+    }
+
+    .section-pp-terminal {
+      max-width: 80%;
+      margin: 0 auto var(--gap);
+    }
+
+    .row-pp-terminal {
+      display: flex;
+      flex-wrap: nowrap;            /* kein Zeilenumbruch */
+      /* ... */
+      min-height: 500px;    /* oder height: 500px; */
+      align-items: center;
+      gap: var(--gap);
+    }
+
+    .text-area-pp-terminal, .image-area-pp-terminal {
+      flex: 0 0 45%;                /* jeweils 50% der Container-Breite */
+      min-width: var(--min-col-width);
+    }
+
+    .text-area-pp-terminal {
+      padding: var(--gap);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .text-area-pp-terminal h2 {
+      margin: 0 0 1vw;
+      color: var(--accent);
+      font-size: clamp(1.5rem, 2vw, 2.5rem);
+    }
+
+    .text-area-pp-terminal p {
+      color: #ccc;
+      margin: 0;
+      font-size: clamp(1rem, 1vw, 2.5rem);
+    }
+
+    /* 2. Image-Container auf 80 % der Elternhöhe begrenzen */
+    .image-area-pp-terminal {
+      position: relative;
+      width: 20%;                  /* oder flex: 0 0 50%; */
+      height: 30%;                 /* genau 80 % der Höhe von .row */
+      max-height: 30%;             /* auf Nummer sicher gehen */
+      overflow: hidden;
+      border-radius: var(--radius);
+      filter: drop-shadow(0 0px 10px rgb(255, 255, 255)); /* Schatten nur um die Form des Logos */
+      transform: translateZ(0);
+
+      /* Fade-In */
+      opacity: 0;
+      animation: fadeIn var(--transition-speed) ease-out forwards;
+      margin-bottom: 5%;
+    }
+
+    /* 3. Bild im Container */
+    .image-area-pp-terminal img {
+      width: 100%;
+      height: 90%;
+      object-fit: cover;
+      display: block;
+      
+    }
+
+    /* Keyframes für Fade-In */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+.banner-section {
+      height: 80vh;
+      width: 100%;
+      position: relative;
+      /* Verlauf: Schwarz (0%) -> Transparent (15%) -> Transparent (85%) -> Schwarz (100%) von oben nach unten */
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,1) 0%,
+          rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%,
+          rgba(0,0,0,1) 100%
+        ),
+        url('images/pp-term-banner-10.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+    }
+    .inhalt {
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      z-index: 1;
+      margin-left: 5%;
+        font-size: 1vw;
+      /* Optional: falls max Breite gewünscht */
+      /* max-width: 70%; */
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="./images/p-term-icon-3.png" alt="Mein Logo">
+  </div>
+
+  <div class="headline-3">
+      <h1 style="font-size: 3.6vw;">Peharge Terminal</h1>
+      <h1 style="font-size: 2vw;">"The coolest terminal in the world"</h1>
+      <h1 style="font-size: 1.5vw; margin-bottom: -8px">100% Free. 100% Open Source.</h1>
+      <h2 style="font-size: 1.1vw;">A warm welcome, to P-Term (C/C++/Rust) and PP-Term (Python)❤️</h2><br><br><br>
+    </div>
+
+  <div class="button-container-3">
+    <button class="terminal-button-github-3" onclick="window.open('https://github.com/Peharge/p-terminal', '_blank')">P-Terminal GitHub</button>
+    <button class="terminal-button-3-3" onclick="window.open('https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat', '_blank')">Download P-Term</button>
+    <button class="terminal-button-5" onclick="window.open('download-pp-term.html', '_blank')">
+      <span class="terminal-content">
+        <span class="terminal-label">Download PP-Term</span>
+        <span class="terminal-icon"></span>
+      </span>
+    </button>
+      <button class="terminal-button-4-3" onclick="window.open('p-term-community.html', '_blank')">P-Terminal Community</button>
+    <button class="mavis-button-3" onclick="window.open('https://peharge.github.io/MAVIS-web/', '_blank')">MAVIS.com</button>
+  </div>
+  <div class="headline-3">
+      <h2 style="font-size: 1.5vw;">Peharge Projects 2025</h2><br><br><br>
+    </div>
+
+  <br><br><br><br>
+
+<div class="headline-4">
+  <h1 style="font-size: 3vw; margin-bottom: -8px">Peharge Terminal?</h1>
+  <h2 style="font-size: 1.5vw; margin-bottom: -8px">Discover the future of developer productivity with Peharge Terminal!</h2>
+</div>
+
+<br><br><br><br>
+
+<section class="banner-section">
+  <div class="inhalt">
+    <br><br><br>
+    <b style="font-size: 1.3vw">Why settle for less?</b> <br>Peharge Terminal comes in two powerful versions, tailored to every developer's needs:
+    <ul>
+      <li>
+        <b>P-Terminal:</b> Lightning-fast, ultra-lightweight, and efficient. <br>Everything you love about the classic CMD – but supercharged! <br>Written in Rust for unbeatable speed and minimal resource usage. <br><i>Ideal for those who value simplicity and performance.</i>
+      </li>
+      <br>
+      <li>
+        <b>PP-Terminal:</b> Unlock a universe of possibilities! The PP-Terminal is <br>not just a terminal – it's your complete development ecosystem. <br>Effortlessly manage over 50 programming languages (including classics like Fortran), <br>seamlessly communicate with WSL, and run cutting-edge AI models <br>(LLMs, Transformers, LSTM, GRU, CNNs, and more) <br>directly on your CPU. Packed with smart tools and extensions for <br>Python, C, C++, Rust, and beyond.<br>
+        Crafted in Python, C, and C++ for maximum flexibility and power.
+      </li>
+    </ul>
+    <br>
+    <b>Why Peharge Terminal?</b>
+    <ul>
+      <li><b>Boost your productivity</b> with automation and smart integrations.</li>
+      <li><b>Stay ahead</b> with regular feature updates and community-driven <br>improvements.</li>
+      <li><b>Easy to use</b> – whether you're a beginner or a pro.</li>
+      <li><b>Join a growing community</b> of developers who are shaping the <br>future of development environments.</li>
+      <li><b>100% free to start</b> – experience the power today!</li>
+    </ul>
+    <br>
+    <b>Don't miss out – try Peharge Terminal now and elevate your workflow!</b>
+  </div>
+</section>
+
+  <br><br><br><br>
+
+    <div class="headline-4">
+      <h1 style="font-size: 4vw; margin-bottom: -8px">NEW PP-Terminal 5</h1>
+      <h2 style="font-size: 1.6vw; margin-bottom: -8px">Why show the standard? The PP Terminal does it all</h2>
+      <h2 style="font-size: 1.6vw; margin-bottom: -8px">— but we show you what sets it apart.</h2>
+    </div>
+
+  <br><br><br>
+
+   <div class="img-1">
+    <img src="./images/pp-term-img.png" alt="Mein Logo">
+  </div>
+
+  <br><br><br>
+
+    <div class="button-container">
+        <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal/tree/main/pp-term', '_blank')">PP-Term GitHub</button>
+        <button class="terminal-button-3" onclick="window.open('download-pp-term.html', '_blank')">Download PP-Term</button>
+        <button class="terminal-button-4" onclick="window.open('pp-term-hole.html', '_blank')">Learn PP-Term</button>
+        <button class="terminal-button-4" onclick="window.open('install-pp-term.html', '_blank')">How to install PP-Term</button>
+        <button class="terminal-button-4" onclick="window.open('commands-pp-term.html', '_blank')">PP-Term Commands</button>
+  </div>
+
+    <br><br><br>
+
+  <section class="section-pp-terminal">
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>What can the PP terminal do</h2>
+        <p>
+          PP-Terminal isn't just another terminal—it's a powerful all-in-one tool that brings together system monitoring, game fun, and cutting-edge AI interaction. With PP-Terminal, you don’t just get the basics; you get seamless access to Linux tools on Windows, instant AI model queries like Qwen 3, and much more.
+
+        Experience the ultimate flexibility, all in one terminal. Why settle for less when you can have it all?
+        </p>
+      </div>
+      <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-img.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>PP-Terminal Design</h2>
+        <p>
+          PP-Terminal blends sleek, modern design with powerful, intelligent performance to create a seamless, future-ready experience. Whether you're an individual user or a business, PP-Terminal elevates your workflow with unmatched efficiency and versatility.
+
+Step into the future of terminal technology — where every command counts.
+        </p>
+      </div>
+      <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-3.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Linux</h2>
+        <p>
+          The PP-Termin supports a wide range of Linux distributions, offering maximum flexibility and compatibility.The PP-Terminal supports a wide range of Linux distributions, offering maximum flexibility and compatibility.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-4.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Search</h2>
+        <p>
+          But that's not all. With PP-Terminal, you can also search websites directly from the terminal. Use the <strong>ps</strong> command followed by a keyword to search for processes, or go further with commands like <strong>ps-github</strong>, <strong>ps-huggingface</strong>, or <strong>ps-arxiv</strong> to search directly on these platforms' websites. This makes it easier than ever to find exactly what you're looking for while working in your terminal.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-5.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Peharge AI</h2>
+        <p style="display: inline;">
+          PP-Terminal goes beyond traditional system tools—it's also your gateway to powerful AI models. With simple commands like 'pa [promt]', 'pa qwen3:30b' or 'pa llama4:maverick', you can access advanced AI models and start interacting right from your terminal</p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-6.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>GIT</h2>
+        <p>
+          PP-Terminal not only offers powerful terminal commands but also integrates Git seamlessly with a range of commands like 'p git', 'git ls all', 'gitk' and more. Whether you’re managing code repositories or visualizing your Git history, PP-Terminal makes it effortless.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-8.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>System administration</h2>
+        <p>
+          The pp-terminal can solve everything you want in the terminal but also graphically...
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-9.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>File administration</h2>
+        <p>
+          PP-Terminal makes managing your files a breeze with commands like 'p ls', 'p ls [project]', 'nano [filename]', 'vim [filename]' and 'eamcs [filename]'. Navigate your directories, edit files, and manage projects with ease, all from the power of one terminal.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-10.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>SIMON ext.</h2>
+        <p>
+          The pp-terminal collaborates with SIMON, also developed by PP-Terminal developers, to utilize cutting-edge imaging technologies and enable more precise cancer diagnoses. Through innovative procedures such as X-rays, CT, MRI, PET, DEXA, and fluoroscopy, the system helps gain vital time and improve the chances of recovery. PP-Terminal – Technology that saves lives.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-11.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Framework administration</h2>
+        <p>
+          PP-Terminal simplifies managing frameworks and packages directly from the terminal with commands like 'p pip' for Python package management, and more. Whether you're installing dependencies, updating frameworks, or managing environments, PP-Terminal provides a seamless and efficient experience.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-13.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>LINUX OS administration</h2>
+        <p>
+          PP-Terminal makes managing WSL (Windows Subsystem for Linux) and Linux distributions easier than ever. With the command 'p wsl', you can quickly view all information about your WSL environments. Additionally, 'p [distro]' displays all details related to a specific Linux distribution, giving you a comprehensive overview in just one command.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-14.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Search</h2>
+        <p>
+          PP-Terminal includes an interactive browser, allowing you to easily visit websites like ollama.com by simply typing commands like 'p ollama.com'.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-16.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Games</h2>
+          <p>PP-Terminal isn't just about powerful system tools—it also adds a bit of fun to your command line experience. Take a break with classic games and playful features that will make your terminal sessions even more enjoyable. You can play classic games like Tetris, Pacman, or even Chess —all directly in the terminal window! Plus, enjoy fun animations, like watching a train pass by for a cool, retro vibe. PP-Terminal brings a little bit of play into your productivity. After all, why not have fun while you're working?</p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-15.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+        <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>Emacs</h2>
+        <p>
+          PP-Terminal lets you interact with various Linux distributions, enabling you to launch applications like Emacs, Vim, Neovim, GNU nano, Kate, Gedit, Geany, VS Code, VSCodium, Eclipse, IntelliJ IDEA, PyCharm, Atom, Sublime Text, Kakoune, Lite XL etc. directly through the interactive interface.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-18.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+    <div class="row-pp-terminal">
+      <div class="text-area-pp-terminal">
+        <h2>More Linux tools</h2>
+        <p>
+          PP-Terminal brings the full range of advanced Linux command-line tools to your Windows machine, without compromise. With support for essential utilities like htop, btop, atop, glances, ncdu, fzf, bat, gitui, lazygit, starship, and more, PP-Terminal gives you everything you need for system monitoring, file management, and Git workflow—all in one sleek, native terminal experience.
+        </p>
+      </div>
+        <div class="image-area-pp-terminal">
+        <img src="./images/pp-term-ads-19.png" alt="PP Terminal Preview" loading="lazy">
+      </div>
+    </div>
+
+  </section>
+
+  <br><br><br>
+
+      <div class="headline-4">
+      <h1 style="font-size: 3vw;">SOON P-Terminal 1</h1>
+    </div>
+
+  <br><br><br>
+
+  <div class="img-1">
+    <img src="./images/p-term-img.png" alt="Mein Logo">
+  </div>
+
+  <br><br><br>
+
+    <div class="button-container">
+        <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal/tree/main/p-term', '_blank')">P-Term GitHub</button>
+        <button class="terminal-button-3" onclick="window.open('https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat', '_blank')">Download P-Term</button>
+        <button class="terminal-button-4" onclick="window.open('commands-p-term.html', '_blank')">P-Term Commands</button>
+  </div>
+
+    <br><br><br>
+
+  <div class="terminal-4">
+    <h2 style="font-size: clamp(1.5rem, 2vw, 2.5rem);">Info P-Term (SOON)</h2>
+    <div class="description">P-Terminal is a blazing-fast terminal written entirely in C and C++, designed for raw performance and low-level control. Forget sluggish shells and bloated terminals—P-Terminal gives you lightning response times, minimal resource usage, and full system power at your fingertips.
+
+Engineered for performance-focused developers, sysadmins, and hardcore terminal users who need every millisecond to count.</div>
+  </div>
+
+<br><br><br><br><br>
+
+</body>
+
+  <div class="button-container">
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge', '_blank')">Peharge GitHub</button>
+    <button class="terminal-button-huggingface" onclick="window.open('https://huggingface.co/Peharge', '_blank')">Peharge Huggingfcae</button>
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal', '_blank')">P-Terminal GitHub</button>
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal/tree/main/pp-term', '_blank')">PP-Term GitHub</button>
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal/tree/main/p-term', '_blank')">P-Term GitHub</button>
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/p-terminal-old/', '_blank')">P-Terminal OLd GitHub</button>
+  </div>
+
+  <div class="button-container">
+    <button class="terminal-button-3" onclick="window.open('https://github.com/Peharge/p-terminal/blob/main/p-term/run-p-term.bat', '_blank')">Download P-Term</button>
+    <button class="terminal-button-3" onclick="window.open('download-pp-term.html', '_blank')">Download PP-Term</button>
+    <button class="terminal-button-3" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/run-mavis-terminal-5.bat', '_blank')">Download MAVIS Terminal 5</button>
+  </div>
+
+  <div class="button-container">
+    <button class="terminal-button-4" onclick="window.open('commands-p-term.html', '_blank')">P-Term Commands</button>
+    <button class="terminal-button-4" onclick="window.open('commands-pp-term.html', '_blank')">PP-Term Commands</button>
+    <button class="terminal-button-4" onclick="window.open('pp-term-hole.html', '_blank')">Learn PP-Term</button>
+      <button class="terminal-button-4" onclick="window.open('install-pp-term.html', '_blank')">How to install PP-Term</button>
+      <button class="terminal-button-4" onclick="window.open('p-term-community.html', '_blank')">P-Terminal Community</button>
+  </div>
+
+  <div class="button-container">
+    <button class="mavis-button" onclick="window.open('https://peharge.github.io/MAVIS-web/', '_blank')">MAVIS.com</button>
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/MAVIS', '_blank')">
+        MAVIS Repository
+    </button>
+
+    <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/MAVIS-images', '_blank')">
+        MAVIS Images Repository
+    </button>
+
+    <button class="terminal-button-3" onclick="window.open('https://github.com/Peharge/MAVIS-images', '_blank')">
+        Download MAVIS 4 Launcher
+    </button>
+    <button class="arch-button" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/install-on-larch-lx.md', '_blank')">
+        Download MAVIS 4 Launcher
+    </button>
+  </div>
+
+
+  <div class="button-container">
+        <button class="terminal-button-github" onclick="window.open('https://github.com/Peharge/MAVIS-web', '_blank')">
+        MAVIS Web Repository
+    </button>
+        <button class="mavis-button" onclick="window.open('license.html', '_blank')">
+    MAVIS Licence
+</button>
+<button class="mavis-button" onclick="window.open('security.html', '_blank')">
+    Security MAVIS
+</button>
+
+<button class="mavis-button" onclick="window.open('contributing.html', '_blank')">
+    Contributing MAVIS
+</button>
+
+<button class="mavis-button" onclick="window.open('code_of_conduct.html', '_blank')">
+    Code of Conduct MAVIS
+</button>
+
+<button class="mavis-button" onclick="window.open('https://github.com/Peharge/MAVIS/blob/main/learn-mavis/README.md', '_blank')">
+    Learn MAVIS
+</button>
+
+      </div>
+
+  <div class="button-container">
+    <button class="terminal-button-4" onclick="window.open('impressum-p-terminal.html', '_blank')">Impressum</button>
+    <button class="terminal-button-4" onclick="window.open('license-p-terminal.html', '_blank')">P-Terminal License</button>
+    <button class="terminal-button-4" onclick="window.open('security-p-terminal.html', '_blank')">Security</button>
+    <button class="terminal-button-4" onclick="window.open('contributing-p-terminal.html', '_blank')">Contributing</button>
+    <button class="terminal-button-4" onclick="window.open('code_of_conduct-p-terminal.html', '_blank')">Code of Conduct</button>
+  </div>
+
+<br><br><br>
+
+  <div class="headline-3">
+    <h1 style="font-size: 1.8vw;">Peharge Terminal</h1>
+    <p>Peharge Projects 2025</p>
+  </div>
+
+<br><br><br><br>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("in-view");
+                }
+            });
+        },
+        {
+            threshold: 0.2, // Sobald 20% sichtbar sind
+        }
+    );
+
+    // Alle animierbaren Elemente, einschließlich .terminal-5
+    const targets = document.querySelectorAll(".headline-4, .img-1");
+    targets.forEach(target => observer.observe(target));
+});
+</script>
+
+
+</html>
