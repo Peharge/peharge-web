@@ -1,6 +1,8 @@
 # _MAVIS Website_
 
 <div align="left">
+   <img src="./icons/p-term-banner-3.svg" alt="peharge"/>
+   <img src="./icons/pp-term-banner-3.svg" alt="peharge"/>
    <img alt="mavis" src="https://github.com/Peharge/MAVIS-images/blob/main/mavis-img-main/MAVIS-icon-banner-3.svg">
    <img alt="mavis-launcher" src="https://github.com/Peharge/MAVIS-images/blob/main/mavis-img-main/MAVIS-launcher-icon-banner-3.svg">
    <img alt="mavis-terminal" src="https://github.com/Peharge/MAVIS-images/blob/main/mavis-img-main/MAVIS-terminal-icon-banner-3.svg">
